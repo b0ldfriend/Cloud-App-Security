@@ -55,7 +55,7 @@ function Get-MCASCredential
     (
         # Specifies the URL of your CAS tenant, for example 'contoso.portal.cloudappsecurity.com'.
         [Parameter(Mandatory=$false)]
-        [ValidateScript({($_.EndsWith('.portal.cloudappsecurity.com') -or $_.EndsWith('.adallom.com'))})]
+        [ValidateScript({($_.EndsWith('.us.portal.cloudappsecurity.com') -or $_.EndsWith('.eu.portal.cloudappsecurity.com'))})]
         [string]$TenantUri,
 
         # Specifies that the credential should be returned into the pipeline for further processing.

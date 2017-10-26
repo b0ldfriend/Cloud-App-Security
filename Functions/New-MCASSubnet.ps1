@@ -1,7 +1,7 @@
 function New-MCASSubnet
 {
     [CmdletBinding()]
-    [Alias('Add-CASSubnet')]
+    [Alias('New-CASSubnet')]
     Param
     (
         # Specifies the URL of your CAS tenant, for example 'contoso.portal.cloudappsecurity.com'.
@@ -26,7 +26,7 @@ function New-MCASSubnet
         [ValidateNotNullOrEmpty()]
         [string[]]$Subnets,
 
-        [Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true,Position=3)]
+        [Parameter(Mandatory=$false,ValueFromPipelineByPropertyName=$true,Position=3)]
         [ValidateNotNullOrEmpty()]
         [string]$Organization,
 
@@ -45,11 +45,14 @@ function New-MCASSubnet
             Catch {Throw $_}
     }
     Process {
+        $Body = [ordered]@{'name'=$Name;'category'=($Category -as [int]);'subnets'=$Subnets}
+
         If ($Tags) {
-            $Body = [ordered]@{'name'=$Name;'category'=($Category -as [int]);'organization'=$Organization;'subnets'=$Subnets;'tags'=$Tags}
+            $Body.Add('tags',$Tags)
         }
-        Else {
-            $Body = [ordered]@{'name'=$Name;'category'=($Category -as [int]);'organization'=$Organization;'subnets'=$Subnets}
+        
+        If ($Organization) {
+            $Body.Add('organization',$Organization)
         }
 
         Try {
@@ -61,11 +64,11 @@ function New-MCASSubnet
         
         Write-Verbose "Checking response for success" 
         If ($Response.StatusCode -eq '200') {
-            Write-Verbose "Successfully deleted subnet $NameOrIdTargeted" 
+            Write-Verbose "Successfully created subnet $NameOrIdTargeted" 
         }
         Else {
-            Write-Verbose "Something went wrong attempting to delete subnet $NameOrIdTargeted" 
-            Write-Error "Something went wrong attempting to delete subnet $NameOrIdTargeted"
+            Write-Verbose "Something went wrong attempting to create subnet $NameOrIdTargeted" 
+            Write-Error "Something went wrong attempting to create subnet $NameOrIdTargeted"
         }  
 
         $Response = $Response.content | ConvertFrom-Json

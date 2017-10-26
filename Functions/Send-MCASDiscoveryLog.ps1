@@ -176,13 +176,11 @@ function Send-MCASDiscoveryLog
             }
         #endregion FINALIZE UPLOAD
 
-        Try
-        {
+        Try {
             # Delete the file
             If ($Delete) {Remove-Item $LogFile -Force -ErrorAction Stop}
         }
-            Catch
-            {
+            Catch {
                 Throw "Could not delete $LogFile : $_"
             }
     }
