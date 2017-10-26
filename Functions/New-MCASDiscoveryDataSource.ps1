@@ -61,8 +61,4 @@ function New-MCASDiscoveryDataSource
         Catch {
             Throw $_  #Exception handling is in Invoke-MCASRestMethod, so here we just want to throw it back up the call stack, with no additional logic
         }
-
-    #$Response = $Response.Content
-
-    $Response
 }

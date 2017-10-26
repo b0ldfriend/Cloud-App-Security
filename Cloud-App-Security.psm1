@@ -248,7 +248,7 @@ Resolve-Path -Path $mypath\Functions\*.ps1 | ForEach-Object -Process {
 
 #----------------------------Exports---------------------------
 # Cmdlets to export (must be exported as functions, not cmdlets) - This array format can be copied directly to the manifest as the 'FunctionsToExport' value
-$ExportedCommands = @('Add-MCASAdminAccess','Export-MCASBlockScript','Get-MCASAdminAccess','Get-MCASAccount','Get-MCASActivity','Get-MCASActivityTypes','Get-MCASAlert','Get-MCASAppInfo','Get-MCASCredential','Get-MCASDiscoveredApp','Get-MCASDiscoverySampleLogs','Get-MCASFile','Get-MCASGovernanceAction','Get-MCASPolicy','Get-MCASReport','Get-MCASReportData','Get-MCASStream','Get-MCASSubnet','New-MCASSubnet','Remove-MCASAdminAccess','Send-MCASDiscoveryLog','Set-MCASAlert','Set-MCASSubnet')
+$ExportedCommands = @('Add-MCASAdminAccess','Export-MCASBlockScript','Get-MCASAdminAccess','Get-MCASAccount','Get-MCASActivity','Get-MCASActivityTypes','Get-MCASAlert','Get-MCASAppInfo','Get-MCASCredential','Get-MCASDiscoveredApp','Get-MCASDiscoverySampleLogs','Get-MCASFile','Get-MCASGovernanceAction','Get-MCASPolicy','Get-MCASReport','Get-MCASReportData','Get-MCASStream','Get-MCASSubnet','New-MCASDiscoveryDataSource','New-MCASSubnet','Remove-MCASAdminAccess','Send-MCASDiscoveryLog','Set-MCASAlert','Set-MCASSubnet')
 $ExportedCommands | ForEach-Object {Export-ModuleMember -Function $_}
 
 #Export-ModuleMember -Function Invoke-MCASRestMethod2
