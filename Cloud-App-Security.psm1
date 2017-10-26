@@ -20,34 +20,35 @@ enum mcas_app {
     }
 
 enum device_type {
-    BARRACUDA
-    BLUECOAT
-    CHECKPOINT
-    CISCO_ASA
-    CISCO_IRONPORT_PROXY
+    BARRACUDA = 101
+    BLUECOAT = 102
+    CHECKPOINT = 103
+    CISCO_ASA = 104
+    CISCO_IRONPORT_PROXY = 106
     CISCO_FWSM
     CISCO_SCAN_SAFE
     CLAVISTER
-    FORTIGATE
-    JUNIPER_SRX
+    FORTIGATE = 108
+    JUNIPER_SRX = 129
     JUNIPER_SRX_SD
     JUNIPER_SRX_WELF
     JUNIPER_SSG
     MACHINE_ZONE_MERAKI
     MCAFEE_SWG
     MICROSOFT_ISA_W3C
-    PALO_ALTO  #PALO_ALTO_SYSLOG 
+    PALO_ALTO = 112  #PALO_ALTO_SYSLOG not yet available here
     SONICWALL_SYSLOG
     SOPHOS_CYBEROAM
     SOPHOS_SG
     SQUID
     SQUID_NATIVE
-    WEBSENSE_SIEM_CEF
-    WEBSENSE_V7_5
-    ZSCALER
-    ZSCALER_QRADAR
+    WEBSENSE_SIEM_CEF = 138
+    WEBSENSE_V7_5 = 135
+    ZSCALER = 120
+    ZSCALER_QRADAR = 170
     }
 
+<#
 enum blockscript_format {
     BLUECOAT_PROXYSG = 102
     CISCO_ASA = 104
@@ -57,6 +58,7 @@ enum blockscript_format {
     WEBSENSE = 135
     ZSCALER = 120
     }
+#>
 
 enum ip_category {
     None = 0

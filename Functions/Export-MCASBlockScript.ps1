@@ -61,7 +61,8 @@ function Export-MCASBlockScript
 
         # Specifies the appliance type to use for the format of the block script. Possible Values: BLUECOAT_PROXYSG, CISCO_ASA, FORTINET_FORTIGATE, PALO_ALTO, JUNIPER_SRX, WEBSENSE
         [Parameter(Mandatory=$true,ValueFromPipeline=$false,Position=0)]
-        [blockscript_format]$Appliance
+        [ValidateSet(BLUECOAT_PROXYSG,CISCO_ASA,FORTINET_FORTIGATE,PALO_ALTO,JUNIPER_SRX,WEBSENSE,ZSCALER)]
+        [device_type]$Appliance
     )
 
     Try {$TenantUri = Select-MCASTenantUri}

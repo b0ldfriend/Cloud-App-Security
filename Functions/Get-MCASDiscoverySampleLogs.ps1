@@ -6,14 +6,13 @@ function Get-MCASDiscoverySampleLogs
         # Specifies which device type for which a sample log file should be downloaded
         [Parameter(Mandatory=$true, ValueFromPipeline=$true, Position=0)]
         [ValidateNotNullOrEmpty()]
-        [device_type]$LogType
+        [device_type]$LogFormat
     )
     Begin {
         Add-Type -assembly "system.io.compression.filesystem"
     }
     Process {
-        switch ($LogType)
-        {
+        switch ($LogFormat) {
             'BARRACUDA'             {$fileName = 'barracuda-web-app-firewall-w3c_demo_log.log'}
             'BLUECOAT'              {$fileName = 'blue-coat-proxysg-access-log-w3c_demo_log.log'}
             'CHECKPOINT'            {$fileName = 'check-point_demo_log.log'}
@@ -41,8 +40,6 @@ function Get-MCASDiscoverySampleLogs
             'WEBSENSE_V7_5'         {$fileName = 'web-security-solutions-investigative-detail-report-csv_demo_log.log'}
             'ZSCALER'               {$fileName = 'zscaler-default-csv_demo_log.log'}
             'ZSCALER_QRADAR'        {$fileName = 'zscaler-qradar-leef_demo_log.log'}
-            
-            Default {return}
         }
 
         $zipFile = "$fileName.zip"
