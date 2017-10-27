@@ -6,13 +6,13 @@ function Get-MCASDiscoverySampleLogs
         # Specifies which device type for which a sample log file should be downloaded
         [Parameter(Mandatory=$true, ValueFromPipeline=$true, Position=0)]
         [ValidateNotNullOrEmpty()]
-        [device_type]$LogFormat
+        [device_type]$DeviceType
     )
     Begin {
         Add-Type -assembly "system.io.compression.filesystem"
     }
     Process {
-        switch ($LogFormat) {
+        switch ($DeviceType) {
             'BARRACUDA'             {$fileName = 'barracuda-web-app-firewall-w3c_demo_log.log'}
             'BLUECOAT'              {$fileName = 'blue-coat-proxysg-access-log-w3c_demo_log.log'}
             'CHECKPOINT'            {$fileName = 'check-point_demo_log.log'}

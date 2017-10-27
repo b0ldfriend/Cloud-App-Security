@@ -17,11 +17,11 @@ function New-MCASDiscoveryDataSource
         [Parameter(Mandatory=$true)]
         [string]$Name,
         
-        # Specifies the appliance type to use for the format of the block script. Possible Values: BLUECOAT_PROXYSG, CISCO_ASA, FORTINET_FORTIGATE, PALO_ALTO, JUNIPER_SRX, WEBSENSE
+        # Specifies the appliance type to use for the format of the block script
         [Parameter(Mandatory=$true)]
-        [device_type]$LogFormat,
+        [device_type]$DeviceType,
 
-        # Specifies the type of receiver to create (valid options are: 'FTP','Syslog-UDP', or 'Syslog-TCP')
+        # Specifies the type of receiver to create. Possible Values: FTP|Syslog-UDP|Syslog-TCP
         [Parameter(Mandatory=$true)]
         [ValidateSet('FTP','Syslog-UDP','Syslog-TCP')]
         [string]$ReceiverType,
@@ -36,7 +36,7 @@ function New-MCASDiscoveryDataSource
     Try {$Token = Select-MCASToken}
         Catch {Throw $_}
 
-    $Body = [ordered]@{'anonymizeUsers'=$AnonymizeUsers;'displayName'=$Name;'logType'=($LogFormat -as [int]);}
+    $Body = [ordered]@{'anonymizeUsers'=$AnonymizeUsers;'displayName'=$Name;'logType'=($DeviceType -as [int]);}
     
     switch ($ReceiverType) {
         'FTP' {

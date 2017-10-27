@@ -4,9 +4,9 @@
 .DESCRIPTION
    Exports a block script, in the specified firewall or proxy device type format, for the unsanctioned apps.
 
-   'Export-MCASBlockScript -Appliance <device format>' returns the text to be used in a Websense block script. Methods available are only those available to custom objects by default.
+   'Export-MCASBlockScript -DeviceType <device format>' returns the text to be used in a Websense block script. Methods available are only those available to custom objects by default.
 .EXAMPLE
-   Export-MCASBlockScript -Appliance WEBSENSE
+   Export-MCASBlockScript -DeviceType WEBSENSE
 
     dest_host=lawyerstravel.com action=deny
     dest_host=wellsfargo.com action=deny
@@ -21,7 +21,7 @@
    This pulls back string to be used as a block script in Websense format.
 
 .EXAMPLE
-   Export-MCASBlockScript -Appliance BLUECOAT_PROXYSG
+   Export-MCASBlockScript -DeviceType BLUECOAT_PROXYSG
 
     url.domain=lawyerstravel.com deny
     url.domain=wellsfargo.com deny
@@ -36,7 +36,7 @@
    This pulls back string to be used as a block script in BlueCoat format.
 
 .EXAMPLE
-   Export-MCASBlockScript -Appliance WEBSENSE | Set-Content MyWebsenseBlockScript.txt -Encoding UTF8
+   Export-MCASBlockScript -DeviceType WEBSENSE | Set-Content MyWebsenseBlockScript.txt -Encoding UTF8
 
    This pulls back a Websense block script in text string format and creates a new UTF-8 encoded text file out of it.
 .FUNCTIONALITY
@@ -59,10 +59,11 @@ function Export-MCASBlockScript
         [ValidateNotNullOrEmpty()]
         [System.Management.Automation.PSCredential]$Credential,
 
-        # Specifies the appliance type to use for the format of the block script. Possible Values: BLUECOAT_PROXYSG, CISCO_ASA, FORTINET_FORTIGATE, PALO_ALTO, JUNIPER_SRX, WEBSENSE
+        # Specifies the device type to use for the format of the block script. Possible Values: BLUECOAT_PROXYSG,CISCO_ASA,FORTINET_FORTIGATE,PALO_ALTO,JUNIPER_SRX,WEBSENSE,ZSCALER
         [Parameter(Mandatory=$true,ValueFromPipeline=$false,Position=0)]
         [ValidateSet(BLUECOAT_PROXYSG,CISCO_ASA,FORTINET_FORTIGATE,PALO_ALTO,JUNIPER_SRX,WEBSENSE,ZSCALER)]
-        [device_type]$Appliance
+        [alias("Appliance")]
+        [device_type]$DeviceType
     )
 
     Try {$TenantUri = Select-MCASTenantUri}
@@ -72,7 +73,7 @@ function Export-MCASBlockScript
         Catch {Throw $_}
 
     Try {
-        $Response = Invoke-MCASRestMethod2 -Uri ("https://$TenantUri/api/discovery_block_scripts/?format="+($Appliance -as [int])) -Method Get -Token $Token
+        $Response = Invoke-MCASRestMethod2 -Uri ("https://$TenantUri/api/discovery_block_scripts/?format="+($DeviceType -as [int])) -Method Get -Token $Token
     }
         Catch {
             Throw $_  #Exception handling is in Invoke-MCASRestMethod, so here we just want to throw it back up the call stack, with no additional logic

@@ -25,23 +25,23 @@ enum device_type {
     CHECKPOINT = 103
     CISCO_ASA = 104
     CISCO_IRONPORT_PROXY = 106
-    CISCO_FWSM
-    CISCO_SCAN_SAFE
-    CLAVISTER
+    CISCO_FWSM = 157
+    CISCO_SCAN_SAFE = 124
+    CLAVISTER = 164
     FORTIGATE = 108
     JUNIPER_SRX = 129
-    JUNIPER_SRX_SD
-    JUNIPER_SRX_WELF
-    JUNIPER_SSG
-    MACHINE_ZONE_MERAKI
-    MCAFEE_SWG
-    MICROSOFT_ISA_W3C
-    PALO_ALTO = 112  #PALO_ALTO_SYSLOG not yet available here
-    SONICWALL_SYSLOG
-    SOPHOS_CYBEROAM
-    SOPHOS_SG
-    SQUID
-    SQUID_NATIVE
+    JUNIPER_SRX_SD = 172
+    JUNIPER_SRX_WELF = 174
+    JUNIPER_SSG = 168
+    MACHINE_ZONE_MERAKI = 153
+    MCAFEE_SWG = 121
+    MICROSOFT_ISA_W3C = 159
+    PALO_ALTO = 112  #PALO_ALTO_SYSLOG not available here
+    SONICWALL_SYSLOG = 160
+    SOPHOS_CYBEROAM = 162
+    SOPHOS_SG = 130
+    SQUID = 114
+    SQUID_NATIVE = 155
     WEBSENSE_SIEM_CEF = 138
     WEBSENSE_V7_5 = 135
     ZSCALER = 120
@@ -248,7 +248,7 @@ Resolve-Path -Path $mypath\Functions\*.ps1 | ForEach-Object -Process {
 
 #----------------------------Exports---------------------------
 # Cmdlets to export (must be exported as functions, not cmdlets) - This array format can be copied directly to the manifest as the 'FunctionsToExport' value
-$ExportedCommands = @('Add-MCASAdminAccess','Export-MCASBlockScript','Get-MCASAdminAccess','Get-MCASAccount','Get-MCASActivity','Get-MCASActivityTypes','Get-MCASAlert','Get-MCASAppInfo','Get-MCASCredential','Get-MCASDiscoveredApp','Get-MCASDiscoverySampleLogs','Get-MCASFile','Get-MCASGovernanceAction','Get-MCASPolicy','Get-MCASReport','Get-MCASReportData','Get-MCASStream','Get-MCASSubnet','New-MCASDiscoveryDataSource','New-MCASSubnet','Remove-MCASAdminAccess','Send-MCASDiscoveryLog','Set-MCASAlert','Set-MCASSubnet')
+$ExportedCommands = @('Add-MCASAdminAccess','Export-MCASBlockScript','Get-MCASAdminAccess','Get-MCASAccount','Get-MCASActivity','Get-MCASActivityTypes','Get-MCASAlert','Get-MCASAppInfo','Get-MCASCredential','Get-MCASDiscoveredApp','Get-MCASDiscoveryDataSource','Get-MCASDiscoverySampleLogs','Get-MCASFile','Get-MCASGovernanceAction','Get-MCASPolicy','Get-MCASReport','Get-MCASReportData','Get-MCASStream','Get-MCASSubnet','New-MCASDiscoveryDataSource','New-MCASSubnet','Remove-MCASAdminAccess','Remove-MCASDiscoveryDataSource','Send-MCASDiscoveryLog','Set-MCASAlert','Set-MCASSubnet')
 $ExportedCommands | ForEach-Object {Export-ModuleMember -Function $_}
 
 #Export-ModuleMember -Function Invoke-MCASRestMethod2
