@@ -17,6 +17,7 @@ function Get-MCASDiscoverySampleLogs
             'BLUECOAT'              {$fileName = 'blue-coat-proxysg-access-log-w3c_demo_log.log'}
             'CHECKPOINT'            {$fileName = 'check-point_demo_log.log'}
             'CISCO_ASA'             {$fileName = 'cisco-asa-firewall_demo_log.log'}
+            'CISCO_ASA_FIREPOWER'   {$fileName = 'cisco-asa-firepower_demo_log.log'}
             'CISCO_IRONPORT_PROXY'  {$fileName = 'cisco-ironport-wsa_demo_log.log'}
             'CISCO_FWSM'            {$fileName = 'cisco-fwsm_demo_log.log'}
             'CISCO_SCAN_SAFE'       {$fileName = 'cisco-scansafe_demo_log.log'}

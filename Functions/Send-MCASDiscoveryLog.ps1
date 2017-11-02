@@ -25,6 +25,7 @@ function Send-MCASDiscoveryLog
         # The full path of the Log File to be uploaded, such as 'C:\mylogfile.log'.
         [Parameter(Mandatory=$true, ValueFromPipeline=$true, Position=0)]
         [Validatescript({Test-Path $_})]
+        [Validatescript({(Get-Item $_).Length -le 5GB})]
         [string]$LogFile,
 
         # Specifies the source device type of the log file.

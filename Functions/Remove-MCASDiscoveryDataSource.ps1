@@ -20,32 +20,35 @@ function Remove-MCASDiscoveryDataSource
 
         [switch]$Quiet
     )
+    Begin {
+        Try {$TenantUri = Select-MCASTenantUri}
+            Catch {Throw $_}
 
-    Try {$TenantUri = Select-MCASTenantUri}
-        Catch {Throw $_}
-
-    Try {$Token = Select-MCASToken}
-        Catch {Throw $_}
-
-    Try {
-        $Response = Invoke-MCASRestMethod2 -Uri "https://$TenantUri/cas/api/v1/discovery/data_sources/$Identity/" -Method Delete -Token $Token
+        Try {$Token = Select-MCASToken}
+            Catch {Throw $_}
     }
-        Catch {
-            Throw $_  #Exception handling is in Invoke-MCASRestMethod, so here we just want to throw it back up the call stack, with no additional logic
+    Process {
+        Try {
+            $Response = Invoke-MCASRestMethod2 -Uri "https://$TenantUri/cas/api/v1/discovery/data_sources/$Identity/" -Method Delete -Token $Token
         }
+            Catch {
+                Throw $_  #Exception handling is in Invoke-MCASRestMethod, so here we just want to throw it back up the call stack, with no additional logic
+            }
 
-    If ($Response.StatusCode -eq '200') {
-        Write-Verbose "Data source $Identity was removed from MCAS"
-        
-        if (!$Quiet) {
-            $true
+        If ($Response.StatusCode -eq '200') {
+            Write-Verbose "Data source $Identity was removed from MCAS"
+            
+            if (!$Quiet) {
+                $true
+            }
+        }
+        Else {
+            Write-Error "Data source $Identity could not be removed from MCAS"
+            
+            if (!$Quiet) {
+                $false
+            }
         }
     }
-    Else {
-        Write-Error "Data source $Identity could not be removed from MCAS"
-        
-        if (!$Quiet) {
-            $false
-        }
-    }
+    End {}
 }
